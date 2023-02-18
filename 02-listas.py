@@ -55,3 +55,66 @@ valores[0] = "beterraba"
 valores[-1] = "alho"
 
 print("DEPOIS:",valores)
+
+# 6) DETERMINANDO QUANTOS ELEMENTOS HÁ NA LISTA: len()
+print("Número de elementos na lista:", len(valores))
+
+# Imprimindo o último elemento da lista com ajuda de len ()
+print("Último valor da lista:", valores[len(valores) - 1])
+print(valores)
+
+print("-" * 80)
+
+# 7) REMOVENDO O ÚLTIMO ELEMENTO DA LISTA: pop()
+print("ANTES:")
+ultimo = valores.pop()
+print("Valor removido da lista:", ultimo)
+print("DEPOIS:", valores)
+
+print("-" * 80)
+
+# 8) REMOVENDO UM ELEMENTO POR SUA POSIÇÃO: pop() com parâmetro
+print("ANTES:", valores)
+pos9 = valores.pop(9)     #Remove o elemento da posição 9
+print("Valor removido da posição 9:", pos9)
+pos0 = valores.pop(0)     #Remove o primeiro elemento(posição 0)
+print("Valor removido da posição 0:", pos0)
+print("DEPOIS:", valores)
+
+print("-" * 80)
+
+# 9)REMOVENDO UM ELEMENTO PELO SEU VALOR: remove()
+print("ANTES:", valores)
+valores.remove("batata")   #Remove o valor "batata"
+valores.remove(5)    #Remove o vlaor 5
+print("DEPOIS:", valores)
+
+print("-" * 80)
+
+# Acrescendo mais alguns elementos na lista
+valores.append(15)
+valores.append(13)
+valores.append("milho")
+valores.append(17)
+valores.append("mandioca")
+valores.append(19)
+
+print("-" * 80)
+
+# 10)FATIANDO UMA LISTA
+print(valores)
+
+# Cria um sublista que contém os elementos de 1 até
+# a posição 7 (posição 8 não entra)
+sublista2_7 = valores[2:8]
+print("Sublista de 2 a 7:", sublista2_7)
+
+# Cria uma sublista que contém os elementos do ínicio
+# até a posição 5 (posição 6 não entra)
+sublista0_5 = valores[6]
+print("Sublista de 0 a 5:", sublista0_5)
+
+# Cria uma sublista que contém os elementos da posição 10
+# até o fim da lista
+sublista10_fim = valores[10:]
+print("Sublista de 10 até o final:", sublista10_fim)
