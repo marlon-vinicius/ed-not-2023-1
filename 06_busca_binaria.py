@@ -10,6 +10,9 @@
 """
 comps = 0     # Conta o número de comparações
 def busca_binaria(lista, val):
+    global comps
+    comps = 0
+
     ini = 0               # Inicio da lista
     fim = len(lista) - 1  # Fim da lista
 
@@ -27,7 +30,52 @@ def busca_binaria(lista, val):
             fim = meio - 1
 
         else: # val > lista[meio]:
-            comps = +2
+            comps += 2
             ini = meio + 1
         
     return -1  # Valor não existe na lista
+
+# TESTES COM NOMES
+
+import sys
+sys.dont_write_bytecode = True   # Impede a criação do cache
+from time import time
+
+from data.lista_nomes import nomes
+
+# Busca pelo nome MARLON
+hora_ini = time()
+resultado = busca_binaria(nomes, "MARLON")
+hora_fim = time()
+print(f"Posição do nome MARLON na lista: {resultado}")
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000} ms, comparações : {comps}")
+
+# Busca pelo nome CARLOS
+
+hora_ini = time()
+resultado = busca_binaria(nomes, "CARLOS")
+hora_fim = time()
+print(f"Posição do nome CARLOS na lista: {resultado}")
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000} ms, comparações : {comps}")
+
+# Busca pelo nome YARA
+
+hora_ini = time()
+resultado = busca_binaria(nomes, "YARA")
+hora_fim = time()
+print(f"Posição do nome YARA na lista: {resultado}")
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000} ms, comparações : {comps}")
+
+# Busca pelo nome ORKUTILSON
+
+hora_ini = time()
+resultado = busca_binaria(nomes, "ORKUTILSON")
+hora_fim = time()
+print(f"Posição do nome ORKUTILSON na lista: {resultado}")
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000} ms, comparações : {comps}")
+
+hora_ini = time()
+resultado = busca_binaria(nomes, "AARAO")
+hora_fim = time()
+print(f"Posição do nome AARAO na lista: {resultado}")
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000} ms, comparações : {comps}")
