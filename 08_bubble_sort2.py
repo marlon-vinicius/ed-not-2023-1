@@ -5,6 +5,8 @@
     for MENOR que o primeiro. Efetua tantas passadas quanto
     quanto necessárias, até que, na última passada, nenhuma troca
     seja efetuada
+    VERSÃO OTIMIZADA COM ENCOLHIMENTO DO PERCURSO A CADA
+    PASSADA
 """
 
 # Variáveis de estatística
@@ -14,6 +16,8 @@ def bubble_sort(lista):
     global comps, trocas, passadas
     comps = trocas = passadas = 0
 
+    desloc = 1
+
     # Loop eterno, não sabemos quantas passdas serão necessárias
     while True:
         trocou = False
@@ -21,7 +25,7 @@ def bubble_sort(lista):
 
         # Percurso da lista, do primeiro ao PENÚLTIMO
         # elemento, com acesso a cada posição
-        for pos in range(len(lista) - 1):
+        for pos in range(len(lista) - desloc):
 
             comps += 1
 
@@ -35,6 +39,9 @@ def bubble_sort(lista):
 
         if not trocou:   # Não houve troca na passada
             break        # Interrompe o loop eterno; acabou
+
+        # Aumenta o deslocamento para diminuir o tamanho da próxima passada
+        desloc +=1
 
 ##############################################################################
 
