@@ -26,7 +26,7 @@ def merge_sort(lista):
         # Tira uma cópia da primeira metade da lista
         sublista_esq = lista[:meio]
         # Tira uma cópia da segunda metade da lista
-        sublista_dir = lista[:meio]
+        sublista_dir = lista[meio:]
         divs += 1   # Número de divisões
 
         # Chamamos recursividade a função para que ela
@@ -47,7 +47,7 @@ def merge_sort(lista):
             if sublista_esq[pos_esq] < sublista_dir[pos_dir]:
                 # "Desce" o elemento da esquerda para a lista ordenada
                 ordenada.append(sublista_esq[pos_esq])
-                pos_esq   # Incrementa pos_esq
+                pos_esq += 1  # Incrementa pos_esq
             # O menor elemento stá na sublista da direita
             else:
                 # Desce o elemento da direita para a sublista ordenada
