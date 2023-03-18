@@ -83,3 +83,36 @@ resultado = merge_sort(nums)
 print("Lista original:", nums)
 print("Lista ordenada:", resultado)
 print(f"Divisões: {divs}, junções: {juncs}, comparações: {comps}")
+
+divs = juncs = comps = 0
+pior_caso = [8, 1, 5, 0, 6, 2, 4, 7, 9, 3]
+resultado = merge_sort(pior_caso)
+print("Lista ordenada (pior caso):", resultado)
+print(f"Divisões: {divs}, junções: {juncs}, comparações: {comps}")
+
+#####################################################################
+
+from time import time
+import sys
+import tracemalloc
+sys.dont_write_bytecode = True
+
+from data.nomes_desord import nomes
+
+# Pega apenas os 10k primeiros nomes
+#nomes = nomes[:25000]
+
+divs = juncs = comps = 0
+
+tracemalloc.start()   # Inicia a medição de memória
+hora_ini = time()
+resultado = merge_sort(nomes)
+hora_fim = time()
+
+# Captura as informações de gasto de memória
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+
+print("Nomes ordenados:", resultado)
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000}ms")
+print(f"Pico de memória: {mem_pico / 1024 / 1024} MB")
+print(f"Divisões: {divs}, junções: {juncs}, comparações: {comps}")
