@@ -76,3 +76,30 @@ passadas = comps = trocas = 0
 quick_sort(nums)
 print("Lista ordenada:", nums)
 print(f"Comparações: {comps}, trocas: {trocas}, passadas: {passadas}")
+
+#############################################################################
+
+from time import time
+import sys
+import tracemalloc
+sys.dont_write_bytecode = True
+
+from data.nomes_desord import nomes
+
+# Pega apenas os 10k primeiros nomes
+#nomes = nomes[:25000]
+
+passadas = comps = trocas = 0
+
+tracemalloc.start()   # Inicia a medição de memória
+hora_ini = time()
+quick_sort(nomes)
+hora_fim = time()
+
+# Captura as informações de gasto de memória
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+
+print("Nomes ordenados:", nomes)
+print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000}ms")
+print(f"Pico de memória: {mem_pico / 1024 / 1024} MB")
+print(f"Comparações: {comps}, trocas: {trocas}, passadas: {passadas}")
