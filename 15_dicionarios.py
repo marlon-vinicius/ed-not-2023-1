@@ -49,6 +49,12 @@ forma3 = {
     "tipo": "E"  # Elipse
 }
 
+# forma4 = {
+#     "fruta": 10,
+#     "legume": 7,
+#     "tipo": "T"
+# }
+
 from math import pi
 
 def calcular_area(forma):
@@ -60,3 +66,14 @@ def calcular_area(forma):
         return forma["base"] / 2 * (forma["altura"] / 2) * pi
     else:
         return None
+
+###################################################################
+
+# Calculando a área das formas
+print(f"Base: {forma1['base']}; altura: {forma1['altura']}; tipo: {forma1['tipo']}; ÁREA: {calcular_area(forma1)}")
+
+print(f"Base: {forma2['base']}; altura: {forma2['altura']}; tipo: {forma2['tipo']}; ÁREA: {calcular_area(forma2)}")
+
+print(f"Base: {forma3['base']}; altura: {forma3['altura']}; tipo: {forma3['tipo']}; ÁREA: {calcular_area(forma3)}")
+
+# print(f"Base: {forma4['base']}; altura: {forma4['altura']}; tipo: {forma4['tipo']}; ÁREA: {calcular_area(forma4)}")
