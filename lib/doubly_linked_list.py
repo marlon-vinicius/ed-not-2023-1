@@ -141,12 +141,61 @@ class DoublyLinkedList:
             # precisa passar a valer none também
             if self.get_count() == 1: self.__head = None
 
+        # 4º caso: remoção em posição intermediária
+        else:
+            removed = self.__find_node(pos)
+            before = removed.prev   # Nodo anterior ao que está sendo removido
+            after = removed.next    # Nodo posterior ao que está sendo removido
+            # O nodo anterior passa a apontar, à frente, para o nodo posterior
+            before.next = after
+            # O nodo posterior passa a apontar, para trás, para o nodo anterior
+            after.prev = before
+
         # Decrementa a quantidade de itens da lista
         self.__count -= 1
 
         # Retorna a informação do usuário armazenada no nodo removido
         return removed.data
 
+    """ Método de atalho para remoção do primeiro nodo """
+    def remove_front(self):
+        return self.remove(0)
+
+    """ Método de atalho para remoção do ultimo nodo """
+
+    def remove_back(self):
+        return self.remove(self.get_count() - 1)
+
+    """
+        Método que retorna o valor armazenado na posição especificada,
+        sem removê-lo
+    """
+    def peek(self, pos):
+        # 1º caso: lista vazia ou posição fora dos limites
+        if self.get_count() == 0 or pos < 0 or pos >= self.get_count():
+            raise Exception("ERRO: posição inválida para consulta")
+
+        node = self.__find_node(pos)
+        return node.data
+
+    """ Método de atalho para consultar o primeiro nodo """
+    def peek_front(self):
+        return self.peek(0)
+
+    """ Método de atalho para consultar o último nodo """
+    def peek_back(self):
+        return self.peek(self.get_count() - 1)
+
+    """
+        Método que procura um nodo por seu valor
+        Retorna a posição do nodo, se o encontrar, ou -1, caso contrário
+    """
+    def find(self, val):
+        node = self.__head
+        for pos in range(0, self.get_count()):
+            if node.data == val: return pos   # Encontrou o valor
+            node = node.next
+        return -1       # Valor não encontrado
     """
         Método que exibe uma representação da lista como string
     """
