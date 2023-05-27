@@ -65,3 +65,59 @@ class BinarySearchTree:
             if root.right is None: root.right = new
             # Se não, passa a considerar o nodo dadireita como raiz
             else: self.__insert_node(root.right, new)
+
+    """
+        Método que percorre a árvore em-ordem
+        1º: percorre recursivaente a subárvore esquerda em-ordem
+        2º: visita a raiz
+        3º: percorre recursivamente a subárvore direita em-ordem
+    """
+    def in_order_transversal(self, action, root = False):
+        # Se o root for False, começamos pela raiz da árvore
+        if root is False: root = self.__root
+
+        if root is not None:
+            self.in_order_transversal(action,root.left)   # 1º
+            action(root.data)     #2º
+            self.in_order_transversal(action,root.right)    #3º
+
+    """
+        Método PÚBLICO que verifica se um valor existe na ABB
+    """
+    def exists(self,key):
+        node = self.__search_node(self.__root, key)
+        return (node is not None)
+
+    """
+        Método PRIVADO que procura por um nodo que contém um valor
+        fornecido (key) e retorna esse nodo, se ele existir, ou None,
+        caso contrário
+    """
+    def __search_node(self, root, key):
+        # 1º caso: árvore vazia
+        if root is None: return None
+
+        # 2º caso: o valor de key é MENOR que o valor na raiz
+        # Continua a buscar recursivamente pela subárvore ESQUERDA
+        if key < root.data: return self.__search_node(root.left, key)
+
+        # 3º caso: o valor de key é MAIOR que o valor na raiz
+        # Continua a buscar recursivamente pela subárvore DIREITA
+        if key > root.data: return self.__search_node(root.right, key)
+
+        # 4º caso: o valor de key é IGUAL ao valor na raiz
+        # ENCONTROU O NODO; retorna o nodo root
+        return root
+
+###########################################################################
+
+arvore = BinarySearchTree()
+
+arvore.insert(23)
+arvore.insert(39)
+arvore.insert(11)
+arvore.insert(31)
+arvore.insert(17)
+
+print("PERCURSO EM-ORDEM:")
+arvore.in_order_transversal(print)
