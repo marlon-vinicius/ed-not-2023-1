@@ -109,6 +109,93 @@ class BinarySearchTree:
         # ENCONTROU O NODO; retorna o nodo root
         return root
 
+    """
+        Método PRIVADO que retorna o maior nodo de uma subárvore
+    """
+    def __max_node(self, root = None):
+        if root is None: root = self.__root
+        node = root
+        # A partir da raiz, desce pela direita até onde der
+        while node is not None and node.right is not None:
+            node = node.right
+        return node
+
+    """
+        Método PRIVADO que retorna o menor nodo de uma subárvore
+    """
+    def __min_node(self, root = None):
+        if root is None: root = self.__root
+        node = root
+        # A partir da raiz, desce pela esquerda até onde der
+        while node is not None and node.left is not None:
+            node = node.left
+        return node
+
+    """
+        Método público para a remoção de um valor da árvore
+    """
+    def remove(self, val):
+        self.__root = self._remove_node(self.__root, val)
+
+    """
+        Método PRIVADO para a remoção de um nodo da árvore
+    """
+    def __remove_node(self, root, val):
+
+        # 1º caso: árvore vazia
+        if root is None: return None
+
+        # 2º caso: o valor a ser removido á MENOR que o valor da raiz
+        # Continua procurando pelo nodo a ser removido pelo lado ESQUERDO
+        if val < root.data:
+            root.left = self.__remove_node(root.left, val)
+            return root
+        # 3º caso: o valor a ser removido é MAIOR que o valor da raiz
+        # Continua procurando pelo nodo a ser removido pelo lado direto
+        if val > root.data:
+            root.right = self.__remove_node(root.right, val)
+            return root
+
+        # 4º caso: o valor a ser removido é IGUAL ao valor da raiz
+        # O NODO A SER REMOVIDO FOR ENCONTRADO
+        # Agora, é necessário determinar o grau do nodo para aplicar
+        # o algoritmo de remoção correto para cada caso
+
+        # 4.1: remoção de nodo de grau 0
+        if root.left is None and root.right is None:
+            # Sobrescreve o nodo (root) com None
+            root = None
+            return root
+
+        # 4.2: remoção de nodo de grau 1 com subárvore à ESQUERDA
+        if root.left is not None and root.right is None:
+            root = root.left
+            return root
+
+        # 4.3: remoção do nodo de grau 1 com subárvore à DIREITA
+        if root.left is None and root.right is not None:
+            root = root.right
+            return root
+
+        # 4.4: remoção de nodo de grau 2
+
+        # É necessário encontrar:
+        # a) o MAIOR nodo da subárvore ESQUERDA; *OU*
+        # b) o MENOR nodo da subárvore DIREITA
+
+        # Opção escolhida: usar o maior nodo da subárvore esquerda
+        new_root = self.__max_node(root.left)
+
+        # Copia o valor do nodo encontrado e sobescreve o valor do
+        # nodo que está sendo "removido"
+        root.data = new_root.data
+
+        # Exclui o valor duplicado que está na subárvore esquerda
+        # (de onde veio o valor de new_root)
+        root.left = self.__remove_node(root.left, new_root.data)
+
+        return root
+
 ###########################################################################
 
 arvore = BinarySearchTree()
